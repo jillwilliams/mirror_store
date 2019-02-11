@@ -1,34 +1,22 @@
-import React, { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
-import logo from "./logo.svg";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from './components/Navbar';
-import ProductList from './components/ProductList';
-import Details from './components/Details';
-import Cart from './components/Cart';
-import Default from './components/Default';
-import Product from './components/Product';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import Router from '../src/components/Cart/Router';
 
-
-
+const Navigation = (props) => <nav>
+  <ul>
+    <li><NavLink to='/'>Home</NavLink></li>
+    <li><NavLink to='/cart'>Cart</NavLink></li>
+  </ul>
+</nav>
 
 class App extends Component {
   render() {
-    return (
-// Simulates the HTML Tag and works as a parent container we are returning so that we aren't overpopuoating our HTML
-      <React.Fragment>
-        <Navbar></Navbar>
-        <Switch>
-          <Route exact path="/" component={ProductList} />
-          <Route path="/details" component={Details} />
-          <Route path="/cart" component={Cart} />
-          <Route component={Default} />
-          <Route path="/product" component={Product} />
-        </Switch>
-      </React.Fragment>
-    );
-  }
+    return <div className="page-container">
+        hi from app js
+        <Navigation />  [buttons (home, cart)]
+        <Router />    [image page]
+    </div>
+  } 
 }
 
 export default App;
