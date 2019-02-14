@@ -1,22 +1,33 @@
 import React from 'react';
+import AddButton from './add-btn';
+import RemoveButton from './remove-btn'
 
 export default function ProductListItem(props) {
-  const thisItemInCart = props.cart.filter(item => item.id === props.product.id)[0];
   return <div className="product-list-item">
     <h3>{ props.product.name }</h3>
     <img 
       height={100} 
       title={ props.product.name } 
-      src={`/products/${props.product.image}`}
-      alt="Shut the Front Door!"/>
+      src={props.product.image}
+      alt="Shut the Front Door!" />
     <div>{ props.product.description }</div>
     <div>${ props.product.price }</div>
     <div>
-      <button onClick={() => props.addToCart(props.product)}>
-        Add Item to Cart ({
-          (thisItemInCart && thisItemInCart.quantity) || 0
-        })
-      </button>
+      <AddButton
+        cartItem={props.cartItem} 
+        product={props.product}
+        addToCart={props.addToCart} 
+      />
+    
+      {
+        props.cartItem
+          ? <RemoveButton
+          cartItem={props.cartItem} 
+          product={props.product}
+          removeFromCart={props.removeFromCart} 
+        />
+        : null
+      }
     </div>
   </div>
 }
